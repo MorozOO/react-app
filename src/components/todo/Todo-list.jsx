@@ -13,7 +13,16 @@ const TodoList = () => {
     setTodoList([...todoList, { id: nanoid(), done: false, title }]);
   };
   const removeTask = (id) => {
-    setTodoList(todoList.filter(task => task.id !== id));
+    setTodoList(todoList.filter((task) => task.id !== id));
+  };
+  const toggleDone = (id) => {
+    const updatedtodoList = todoList.map((task) => {
+      if (task.id === id) {
+        return { ...task, done: !task.done };
+      }
+      return task;
+    });
+    setTodoList(updatedtodoList);
   };
   return (
     <div className="wrapper">
@@ -23,7 +32,12 @@ const TodoList = () => {
         <TodoFilter />
         <ul className="todo-list">
           {todoList.map((item, index) => (
-            <TodoItem {...item} key={index}  removeTask={removeTask}/>
+            <TodoItem
+              {...item}
+              key={index}
+              removeTask={removeTask}
+              toggleDone={toggleDone}
+            />
           ))}
         </ul>
       </div>

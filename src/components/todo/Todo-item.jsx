@@ -4,7 +4,7 @@ const TodoItem = ({title, done, id, removeTask}) => {
   return (
     <li className="list-item">
       <input type="checkbox"  defaultChecked={done}/>
-      {title}
+      <span className={done ? 'task-done' : ''}>{title}</span>
       <button onClick={()=>removeTask(id)}>X</button>
     </li>
   );

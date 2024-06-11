@@ -28,10 +28,12 @@ h1 {
     color: white;
     text-align: center;
 }
-.add-form{
+
+.add-form {
     display: grid;
     grid-template-columns: 1fr 100px;
 }
+
 .input-text {
     font-size: 30px;
     border-radius: 25px;
@@ -51,8 +53,9 @@ button {
 button:hover {
     background: rgb(1, 1, 155);
 }
+
 button:active {
-    box-shadow:inset 2px 2px 10px #0c0c0c;
+    box-shadow: inset 2px 2px 10px #0c0c0c;
     background: blue;
 }
 
@@ -72,15 +75,24 @@ button:active {
     display: grid;
     grid-template-rows: auto;
     gap: 20px;
-    color: white;
-
 }
 
 .list-item {
     display: grid;
     grid-template-columns: 100px 300px 100px;
     align-items: center;
+    
 
+}
+
+.list-item span:not(.task-done){
+    color: white;
+    font-weight: 700;
+}
+.task-done{
+    color: #929292;
+    font-weight: 500;
+    text-decoration: line-through;
 }
 
 .list-item input {
@@ -88,7 +100,7 @@ button:active {
     height: 30px;
 }
 
-.error{
+.error {
     color: red;
     font-style: italic;
 }

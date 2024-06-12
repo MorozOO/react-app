@@ -24,6 +24,15 @@ const TodoList = () => {
     });
     setTodoList(updatedtodoList);
   };
+  const updateTask = (id, title)=>{
+    const updatedTodoList = todoList.map(task => {
+      if(task.id === id){
+        return{...task, title};
+      }
+      return task;
+    });
+    setTodoList(updatedTodoList);
+  };
   return (
     <div className="wrapper">
       <h1>Todo List</h1>
@@ -34,9 +43,10 @@ const TodoList = () => {
           {todoList.map((item, index) => (
             <TodoItem
               {...item}
-              key={index}
+              key={item.id}
               removeTask={removeTask}
               toggleDone={toggleDone}
+              updateTask = {updateTask}
             />
           ))}
         </ul>

@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: bisque;
+    background-color: rgb(205, 230, 250);
 }
 
 .wrapper {
@@ -20,7 +20,8 @@ body {
     align-items: center;
     gap: 1.25rem;
     border: none;
-    box-shadow: 5px 5px 5px #c1c1c1;
+    box-shadow: 5px 5px 5px #3a339e;
+    border-radius: 25px;
 }
 
 h1 {
@@ -81,15 +82,16 @@ button:active {
     display: grid;
     grid-template-columns: 100px 300px 100px;
     align-items: center;
-    
+
 
 }
 
-.list-item span:not(.task-done){
+.list-item span:not(.task-done) {
     color: white;
     font-weight: 700;
 }
-.task-done{
+
+.task-done {
     color: #929292;
     font-weight: 500;
     text-decoration: line-through;
@@ -103,4 +105,15 @@ button:active {
 .error {
     color: red;
     font-style: italic;
+}
+
+.item__edit
+ {
+    min-width: 100%;
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: white;
+    font-size: 20px;
+    justify-self: auto;
 }

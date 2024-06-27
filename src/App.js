@@ -1,17 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
-import First from './components/First';
-import TodoList from './components/todo/Todo-list';
+
+import { Outlet } from 'react-router-dom';
+import Menu from './components/header/menu';
 
 function App() {
   return (
     <div>
-      {/* <First/>
-      <hr/> */}
-    <TodoList/>
+      <Menu/>
+
+      <Outlet/>
+
     </div>
-    
-    
+
+
   );
 }
 

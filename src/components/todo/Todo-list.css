@@ -40,7 +40,7 @@ h1 {
     border-radius: 25px;
 }
 
-button {
+button:not(.btn) {
     padding: 10px 15px;
     background: blue;
     border-radius: 25px;
@@ -107,8 +107,7 @@ button:active {
     font-style: italic;
 }
 
-.item__edit
- {
+.item__edit {
     min-width: 100%;
     max-width: 100%;
     background-color: rgba(0, 0, 0, 0);
@@ -116,4 +115,25 @@ button:active {
     color: white;
     font-size: 20px;
     justify-self: auto;
+}
+
+.active {
+    background-color: #3a339e;
+    box-shadow: inset 2px 2px 10px #0c0c0c;
+}
+
+.btn {
+    padding: 10px 15px;
+
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 25px;
+    border: none;
+    
+}
+
+.btn:not(.active) {
+    background-color: rgb(0, 117, 250);
+    box-shadow: 5px 5px 5px #595959;
 }

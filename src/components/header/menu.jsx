@@ -9,6 +9,7 @@ const Menu = () => {
                 <NavLink to="/todo">ToDo</NavLink>
                 <NavLink to="/first">First</NavLink>
                 <NavLink to="/ball">Magic Ball</NavLink>
+                <NavLink to="/puzlle">Puzzle</NavLink>
             </nav>
         </header>
     );

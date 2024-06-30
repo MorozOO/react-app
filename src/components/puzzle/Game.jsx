@@ -6,9 +6,9 @@ import "./Game.css";
 import GameItem from "./game-item";
 import GameItemEmpty from "./game-item-empty";
 
-const Game = () => {
-  const [shuffledArray, setShuffledArray] = useState(shuffle());
-  const [startedArray, setStartedArray] = useState(startArray());
+const Game = ({size}) => {
+  const [shuffledArray, setShuffledArray] = useState(shuffle(size));
+  const [startedArray, setStartedArray] = useState(startArray(size));
   const [moves, setMoves] = useState(0);
   const [time, setTime] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
@@ -17,7 +17,7 @@ const Game = () => {
     setMoves(0);
     setTime(0);
     setTimerActive(false);
-    setShuffledArray(shuffle());
+    setShuffledArray(shuffle(size));
     setwin(false);
   };
   const checkWin = (shuffledArray) => {
@@ -35,7 +35,7 @@ const Game = () => {
     e.preventDefault();
   };
   const dropped = (e) => {
-    e.preventDefault();
+    if(!win) {e.preventDefault();
     const itemIndex = e.dataTransfer.getData("item");
     const emptyIndex = e.target.dataset.index;
 
@@ -52,12 +52,13 @@ const Game = () => {
     newArray.splice(emptyIndex, 1, shuffledArray[itemIndex]);
     setShuffledArray([...newArray]);
     setMoves(moves + 1);
-    checkWin(newArray);
+    checkWin(newArray);}
   };
   useEffect(() => {
     if (moves === 1) setTimerActive(true);
   }, [moves]);
   return (
+    
     <div className="wrapper">
       <h1>Puzzle Game</h1>
       <div className="top-panel">
@@ -65,8 +66,10 @@ const Game = () => {
         <Timer time={time} setTime={setTime} timerActive={timerActive} />
       </div>
       {win && <h1>You Win</h1>}
-      <div className="game">
-        {shuffledArray.map((item, index) => {
+      <div className={win?"game game-over":"game"}>
+        
+        {
+        shuffledArray.map((item, index) => {
           if (item === "") {
             return (
               <GameItemEmpty

@@ -32,6 +32,7 @@ export const router = createBrowserRouter([
           path: "puzlle",
           element: <Game />
         },
+       
 
       ]
     }

@@ -13,6 +13,9 @@
     gap: 5px;
     padding: 5px;
 }
+.game-over{
+    filter: blur(3px) brightness(80%);
+}
 .game-item{
     width: 70px;
     height: 70px;

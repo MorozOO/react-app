@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { shuffle } from "./shuffleFunction";
+import { startArray } from "./startArray";
 import Timer from "./Timer";
 import "./Game.css";
 import GameItem from "./game-item";
@@ -7,17 +8,26 @@ import GameItemEmpty from "./game-item-empty";
 
 const Game = () => {
   const [shuffledArray, setShuffledArray] = useState(shuffle());
+  const [startedArray, setStartedArray] = useState(startArray());
   const [moves, setMoves] = useState(0);
   const [time, setTime] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
-
+  const [win, setwin] = useState(false);
   const newGame = () => {
     setMoves(0);
     setTime(0);
     setTimerActive(false);
     setShuffledArray(shuffle());
+    setwin(false);
   };
-
+  const checkWin = (shuffledArray) => {
+    for (let i = 0; i < shuffledArray.length; i++) {
+      if (shuffledArray[i] !== startedArray[i]) {
+        return false;
+      }
+    }
+    setwin(true);
+  };
   const startDrag = (e) => {
     e.dataTransfer.setData("item", e.target.dataset.index);
   };
@@ -37,22 +47,24 @@ const Game = () => {
     ) {
       return;
     }
-   const newArray = [...shuffledArray];
-   newArray.splice(itemIndex, 1 ,shuffledArray[emptyIndex]);
-   newArray.splice(emptyIndex, 1 ,shuffledArray[itemIndex]);
-   setShuffledArray([...newArray]);
-   setMoves(moves + 1);
+    const newArray = [...shuffledArray];
+    newArray.splice(itemIndex, 1, shuffledArray[emptyIndex]);
+    newArray.splice(emptyIndex, 1, shuffledArray[itemIndex]);
+    setShuffledArray([...newArray]);
+    setMoves(moves + 1);
+    checkWin(newArray);
   };
   useEffect(() => {
     if (moves === 1) setTimerActive(true);
-    }, [moves]);
+  }, [moves]);
   return (
     <div className="wrapper">
       <h1>Puzzle Game</h1>
       <div className="top-panel">
         <div>Moves:{moves}</div>
-        <Timer time={time} setTime={setTime} timerActive={timerActive}/>
+        <Timer time={time} setTime={setTime} timerActive={timerActive} />
       </div>
+      {win && <h1>You Win</h1>}
       <div className="game">
         {shuffledArray.map((item, index) => {
           if (item === "") {

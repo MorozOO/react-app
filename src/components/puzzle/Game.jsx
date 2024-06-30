@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { shuffle } from "./shuffleFunction";
 import Timer from "./Timer";
 import "./Game.css";
@@ -9,12 +9,12 @@ const Game = () => {
   const [shuffledArray, setShuffledArray] = useState(shuffle());
   const [moves, setMoves] = useState(0);
   const [time, setTime] = useState(0);
-  const [timeeActive, setTimeeActive] = useState(false);
+  const [timerActive, setTimerActive] = useState(false);
 
   const newGame = () => {
     setMoves(0);
     setTime(0);
-    setTimeeActive(false);
+    setTimerActive(false);
     setShuffledArray(shuffle());
   };
 
@@ -41,14 +41,17 @@ const Game = () => {
    newArray.splice(itemIndex, 1 ,shuffledArray[emptyIndex]);
    newArray.splice(emptyIndex, 1 ,shuffledArray[itemIndex]);
    setShuffledArray([...newArray]);
+   setMoves(moves + 1);
   };
-
+  useEffect(() => {
+    if (moves === 1) setTimerActive(true);
+    }, [moves]);
   return (
     <div className="wrapper">
       <h1>Puzzle Game</h1>
       <div className="top-panel">
         <div>Moves:{moves}</div>
-        <Timer time={time} />
+        <Timer time={time} setTime={setTime} timerActive={timerActive}/>
       </div>
       <div className="game">
         {shuffledArray.map((item, index) => {
